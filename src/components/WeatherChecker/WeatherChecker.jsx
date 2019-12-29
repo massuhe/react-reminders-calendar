@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { changeBrightness } from '../../utils/colorUtils'
 import COLORS from '../../utils/colors'
 
 const WeatherChecker = () => {
@@ -13,9 +12,6 @@ const WeatherChecker = () => {
         border-radius: 0.5rem;
         color: ${COLORS.darkBlue};
         transition: background-color 0.2s ease;
-        &:hover {
-          background-color: ${changeBrightness(COLORS.lightblue, -20)};
-        }
       `}
     >
       <span>Click to check weather</span>

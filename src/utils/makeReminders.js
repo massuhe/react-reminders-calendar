@@ -18,7 +18,7 @@ const editReminder = (reminder, date) => {
   }
 }
 
-const FN_BY_ACTIONS = {
+const ACTIONS_EXECUTORS = {
   add: (reminders, reminderInfo, date) => {
     const reminder = createReminder(reminderInfo, date)
     return reminders
@@ -37,8 +37,9 @@ const FN_BY_ACTIONS = {
 
 const makeNewReminders = (action, oldReminders, date, reminder) => {
   const key = date.toISOString()
+  const executeAction = ACTIONS_EXECUTORS[action]
   const newReminders = {
-    [key]: FN_BY_ACTIONS[action](oldReminders[key], reminder, date)
+    [key]: executeAction(oldReminders[key], reminder, date)
   }
   return {
     ...oldReminders,

@@ -34,7 +34,7 @@ const Reminder = ({ reminder, onSelect }) => {
         font-size: 12px;
         transition: background-color 0.2s ease;
         &:hover {
-          background-color: ${changeBrightness(reminder.color, -15)};
+          background-color: ${changeBrightness(reminder.color, -10)};
         }
       `}
     >
@@ -44,7 +44,8 @@ const Reminder = ({ reminder, onSelect }) => {
 }
 
 Reminder.propTypes = {
-  reminder: PropTypes.object.isRequired
+  reminder: PropTypes.object.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 export default Reminder

@@ -1,4 +1,4 @@
-import React, { useState } from 'react' // eslint-disable-line no-unused-vars
+import React, { useState, useEffect } from 'react' // eslint-disable-line no-unused-vars
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
@@ -8,6 +8,7 @@ import Button from '../shared/Button'
 import WeatherChecker from '../WeatherChecker'
 import useObjectState from '../../hooks/useObjectState'
 import COLORS from '../../utils/colors'
+import FormHeader from './FormHeader'
 
 const handle = set => prop => e => set({ [prop]: e.target.value })
 const emptyFormState = {
@@ -33,30 +34,7 @@ const ReminderForm = ({ mode, reminder, onFinishSave }) => {
 
   return (
     <>
-      <div
-        css={css`
-          display: flex;
-          align-items: center;
-        `}
-      >
-        <h1
-          css={css`
-            margin: 0 1rem 0 0;
-            text-transform: capitalize;
-          `}
-        >
-          {mode} reminder
-        </h1>
-        {mode === 'edit' && (
-          <Button
-            background={COLORS.dangerRed}
-            color='white'
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-        )}
-      </div>
+      <FormHeader mode={mode} onDelete={handleDelete} />
       <Form onSubmit={handleSubmit}>
         <Input
           value={form.description}
@@ -83,7 +61,7 @@ const ReminderForm = ({ mode, reminder, onFinishSave }) => {
           label='time'
           required
         />
-        <WeatherChecker auto={mode !== 'view'} />
+        <WeatherChecker />
         <Input
           value={form.color}
           onChange={handleChange('color')}
@@ -107,8 +85,9 @@ const ReminderForm = ({ mode, reminder, onFinishSave }) => {
 }
 
 ReminderForm.propTypes = {
-  mode: PropTypes.oneOf(['add', 'edit', 'view']),
-  reminder: PropTypes.object
+  mode: PropTypes.oneOf(['add', 'edit', 'view', '']).isRequired,
+  reminder: PropTypes.object,
+  onFinishSave: PropTypes.func.isRequired
 }
 
 export default ReminderForm

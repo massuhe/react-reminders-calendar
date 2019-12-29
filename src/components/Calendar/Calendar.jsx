@@ -2,14 +2,20 @@
 import { jsx, css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import CalendarHeader from './CalendarHeader'
-import buildDays from '../utils/buildDays'
+import buildDays from '../../utils/buildDays'
 import CalendarDay from './CalendarDay'
 
 const extractReminders = reminders => day => {
-  return []
+  return reminders[day.date.toISOString()] || []
 }
 
-const Calendar = ({ month, reminders, selectedDay, onSelectDay }) => {
+const Calendar = ({
+  month,
+  reminders,
+  selectedDay,
+  onSelectDay,
+  onSelectReminder
+}) => {
   const days = buildDays(month, reminders, selectedDay)
   const extract = extractReminders(reminders)
   return (
@@ -28,6 +34,7 @@ const Calendar = ({ month, reminders, selectedDay, onSelectDay }) => {
           day={d}
           reminders={extract(d)}
           onSelectDay={onSelectDay}
+          onSelectReminder={onSelectReminder}
         />
       ))}
     </div>

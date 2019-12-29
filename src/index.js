@@ -1,9 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import App from './App'
+import { Global } from '@emotion/core'
+import App from './components/App'
+import globalStyles from './globalStyles'
 
 const root = document.getElementById('root')
 
-ReactDOM.render(<App />, root)
+const component = (
+  <>
+    <Global styles={globalStyles} />
+    <App />
+  </>
+)
+
+ReactDOM.render(component, root)

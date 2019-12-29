@@ -24,9 +24,14 @@
     "body": [
       "/** @jsx jsx */",
       "import { jsx, css } from '@emotion/core'",
+      "import PropTypes from 'prop-types'",
       "",
       "const $1 = () => {",
       "  return ($2)",
+      "}",
+      "",
+      "$1.propTypes = {",
+      "",
       "}",
       "",
       "export default $1"

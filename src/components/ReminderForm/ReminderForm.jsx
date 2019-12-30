@@ -20,7 +20,7 @@ const emptyFormState = {
 const getInitialFormState = (mode, reminder) => () =>
   mode === 'edit' ? reminder : emptyFormState
 
-const ReminderForm = ({ mode, reminder, onFinishSave }) => {
+const ReminderForm = ({ mode, day, reminder, onFinishSave }) => {
   const [form, setForm] = useObjectState(getInitialFormState(mode, reminder))
 
   const handleSubmit = e => {
@@ -61,7 +61,12 @@ const ReminderForm = ({ mode, reminder, onFinishSave }) => {
           label='time'
           required
         />
-        <WeatherChecker />
+        <WeatherChecker
+          day={day}
+          time={form.time}
+          city={form.city}
+          checkOnFirstRender={mode === 'edit'}
+        />
         <Input
           value={form.color}
           onChange={handleChange('color')}
@@ -85,7 +90,8 @@ const ReminderForm = ({ mode, reminder, onFinishSave }) => {
 }
 
 ReminderForm.propTypes = {
-  mode: PropTypes.oneOf(['add', 'edit', 'view', '']).isRequired,
+  mode: PropTypes.oneOf(['add', 'edit', '']).isRequired,
+  day: PropTypes.object.isRequired,
   reminder: PropTypes.object,
   onFinishSave: PropTypes.func.isRequired
 }

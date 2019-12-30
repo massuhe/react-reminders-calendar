@@ -1,13 +1,13 @@
 import { useState } from 'react'
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import Modal from '../Modal'
 import Calendar from '../Calendar'
 import ReminderForm from '../ReminderForm'
 import useSelectedDay from './hooks/useSelectedDay'
-import Button from '../shared/Button'
 import makeNewReminders from '../../utils/makeReminders'
-import COLORS from '../../utils/colors'
+import AppContainer from './AppContainer'
+import ActionButtons from './ActionButtons'
 
 const getCurrentMonth = () => {
   return new Date().getMonth()
@@ -40,29 +40,17 @@ const App = () => {
   }
 
   return (
-    <div
-      css={css`
-        max-width: 1200px;
-        margin: ${selectedDay ? 0 : 56}px auto 0 auto;
-      `}
-    >
+    <AppContainer isDaySelected={Boolean(selectedDay)}>
       {selectedDay && (
-        <div>
-          <Button background={COLORS.green} onClick={openModal('add')}>
-            Add new reminder
-          </Button>
-          <Button
-            background={COLORS.dangerRed}
-            color='white'
-            onClick={deleteAllReminders}
-          >
-            Delete all reminders
-          </Button>
-        </div>
+        <ActionButtons
+          onAddReminder={openModal('add')}
+          onDeleteAllReminders={deleteAllReminders}
+        />
       )}
       <Modal visible={mode !== ''} onDismiss={closeModal}>
         <ReminderForm
           mode={mode}
+          day={selectedDay}
           reminder={selectedReminder}
           onFinishSave={handleFinishSave}
         />
@@ -74,7 +62,7 @@ const App = () => {
         onSelectDay={setSelectedDay}
         onSelectReminder={openEditModal()}
       />
-    </div>
+    </AppContainer>
   )
 }
 

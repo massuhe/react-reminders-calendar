@@ -1,7 +1,6 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 import { isColorLight, changeBrightness } from '../../utils/colorUtils'
 
@@ -13,7 +12,7 @@ const getDescription = r => {
           font-weight: bold;
         `}
       >
-        {format(r.date, 'HH:mm')}:{' '}
+        {r.time}:{' '}
       </span>
       <span>{r.description}</span>
     </>

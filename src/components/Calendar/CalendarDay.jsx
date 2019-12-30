@@ -25,7 +25,7 @@ const CalendarDay = ({ day, reminders, onSelectDay, onSelectReminder }) => {
         border-left: solid 1px black;
         color: ${getColor(day)};
         background-color: ${day.selected ? 'lightblue' : 'white'};
-        min-height: 100px;
+        height: 120px;
       `}
       onClick={handleClick(onSelectDay)(day)}
     >
@@ -33,6 +33,7 @@ const CalendarDay = ({ day, reminders, onSelectDay, onSelectReminder }) => {
       <div
         css={css`
           padding: 0.5rem;
+          overflow-y: auto;
         `}
       >
         {reminders.map(r => (

@@ -22,8 +22,8 @@ const INITIAL_WEATHER_STATUS = {
 const isWeatherAvailableForDay = date =>
   resetTime() <= date && date <= addDays(Date.now(), 5)
 
-const getInitialState = date => () => {
-  if (!isWeatherAvailableForDay(date)) {
+const getInitialState = (date, isWeatherAvailable) => () => {
+  if (!isWeatherAvailable) {
     return {
       code: WEATHER_SERVICE_CODES.WEATHER_NOT_AVAILABLE,
       color: COLORS.lightGray,
@@ -35,8 +35,13 @@ const getInitialState = date => () => {
 }
 
 const WeatherChecker = ({ city, time, day, checkOnFirstRender }) => {
-  const [loading, setLoading] = useState(checkOnFirstRender)
-  const [weatherStatus, setWeatherStatus] = useState(getInitialState(day))
+  const isWeatherAvailable = isWeatherAvailableForDay(day)
+  const [weatherStatus, setWeatherStatus] = useState(
+    getInitialState(day, isWeatherAvailable)
+  )
+  const [loading, setLoading] = useState(
+    checkOnFirstRender && isWeatherAvailable
+  )
   const firstRender = useFirstRender()
 
   const getWeather = () => () => {

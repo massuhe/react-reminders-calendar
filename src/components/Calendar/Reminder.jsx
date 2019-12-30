@@ -19,14 +19,17 @@ const getDescription = r => {
   )
 }
 
-const Reminder = ({ reminder, onSelect }) => {
+const getHandler = (s, d) => r => () => !d && s(r)
+
+const Reminder = ({ reminder, onSelect, disabled }) => {
   return (
     <div
       data-testid='reminder'
       key={reminder.time}
-      onClick={onSelect(reminder)}
+      onClick={getHandler(onSelect, disabled)(reminder)}
       css={css`
-        cursor: pointer;
+        cursor: ${disabled ? 'auto' : 'pointer'};
+        opacity: ${disabled ? '0.5' : '1'};
         background-color: ${reminder.color};
         color: ${isColorLight(reminder.color) ? 'black' : 'white'};
         padding: 0.2rem;
@@ -45,7 +48,8 @@ const Reminder = ({ reminder, onSelect }) => {
 
 Reminder.propTypes = {
   reminder: PropTypes.object.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 }
 
 export default Reminder

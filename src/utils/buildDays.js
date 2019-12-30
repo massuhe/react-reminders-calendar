@@ -1,12 +1,13 @@
 import getDaysInMonth from 'date-fns/getDaysInMonth'
 import setMonth from 'date-fns/setMonth'
+import setYear from 'date-fns/setYear'
 import setDate from 'date-fns/setDate'
 import getDay from 'date-fns/getDay'
 import addMonths from 'date-fns/addMonths'
 import isWeekend from 'date-fns/isWeekend'
 import { isEqualWithoutTimezone, resetTime } from './timeUtils'
 
-const getCurrentMonthDays = (month, reminders, selectedDay) =>
+const getCurrentMonthDays = (month, selectedDay) =>
   Array.from({
     length: getDaysInMonth(month)
   }).map((_, i) => {
@@ -25,9 +26,11 @@ const getPastMonthDays = month => {
   const prevMonthTotalDays = getDaysInMonth(prevMonth)
   return Array.from({ length: firstWeekDayOfCurrentMonth }).map((_, i) => ({
     disabled: true,
-    date: setDate(
-      prevMonth,
-      prevMonthTotalDays - firstWeekDayOfCurrentMonth + i + 1
+    date: resetTime(
+      setDate(
+        prevMonth,
+        prevMonthTotalDays - firstWeekDayOfCurrentMonth + i + 1
+      )
     )
   }))
 }
@@ -35,18 +38,14 @@ const getPastMonthDays = month => {
 const getNextMonthDays = (month, daysAccum) => {
   return Array.from({ length: 35 - daysAccum }).map((_, i) => ({
     disabled: true,
-    date: setDate(addMonths(month, 1), i + 1)
+    date: resetTime(setDate(addMonths(month, 1), i + 1))
   }))
 }
 
-const buildDays = (month, reminders, selectedDay) => {
-  const monthDateFormat = setMonth(new Date(), month)
+const buildDays = (month, year, selectedDay) => {
+  const monthDateFormat = setMonth(setYear(new Date(), year), month)
   // Init days array with the days of the current month.
-  const currentMonthDays = getCurrentMonthDays(
-    monthDateFormat,
-    reminders,
-    selectedDay
-  )
+  const currentMonthDays = getCurrentMonthDays(monthDateFormat, selectedDay)
 
   // Fill the left side of the calendar with previous month's days if current month's 1st day is not Sunday.
   const pastMonthDays = getPastMonthDays(monthDateFormat)

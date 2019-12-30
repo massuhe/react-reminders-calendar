@@ -7,7 +7,7 @@ const AppContainer = ({ children, isDaySelected }) => {
     <div
       css={css`
         max-width: 1200px;
-        margin: ${isDaySelected ? 0 : 55}px auto 0 auto;
+        margin: 0 auto;
       `}
     >
       {children}

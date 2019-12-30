@@ -36,7 +36,12 @@ const CalendarDay = ({ day, reminders, onSelectDay, onSelectReminder }) => {
         `}
       >
         {reminders.map(r => (
-          <Reminder key={r.id} reminder={r} onSelect={onSelectReminder} />
+          <Reminder
+            key={r.id}
+            reminder={r}
+            onSelect={onSelectReminder}
+            disabled={day.disabled}
+          />
         ))}
       </div>
     </div>

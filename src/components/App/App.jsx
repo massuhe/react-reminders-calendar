@@ -1,6 +1,7 @@
 import { useState } from 'react'
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
+import setDay from 'date-fns/setDay'
 import Modal from '../Modal'
 import Calendar from '../Calendar'
 import ReminderForm from '../ReminderForm'
@@ -8,7 +9,7 @@ import useSelectedDay from './hooks/useSelectedDay'
 import makeNewReminders from '../../utils/makeReminders'
 import AppContainer from './AppContainer'
 import ActionButtons from './ActionButtons'
-import { setDay } from 'date-fns'
+import MonthSelector from '../MonthSelector'
 
 const initialMonth = () => setDay(new Date(), 1)
 
@@ -22,7 +23,7 @@ const App = () => {
   const openModal = m => () => setMode(m)
   const closeModal = () => setMode('')
 
-  const openEditModal = () => r => () => {
+  const openEditModal = () => r => {
     setSelectedReminder(r)
     openModal('edit')()
   }
@@ -38,8 +39,14 @@ const App = () => {
     setReminders(newReminders)
   }
 
+  const changeMonth = m => {
+    setSelectedMonth(m)
+    setSelectedDay(null)
+  }
+
   return (
-    <AppContainer isDaySelected={Boolean(selectedDay)}>
+    <AppContainer>
+      <MonthSelector currentMonth={selectedMonth} onChangeMonth={changeMonth} />
       {selectedDay && (
         <ActionButtons
           onAddReminder={openModal('add')}

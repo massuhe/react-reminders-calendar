@@ -17,7 +17,7 @@ const Calendar = ({
   onSelectDay,
   onSelectReminder
 }) => {
-  const days = buildDays(month, reminders, selectedDay)
+  const days = buildDays(month, year, selectedDay)
   const extract = extractReminders(reminders)
   return (
     <div

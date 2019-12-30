@@ -4,10 +4,19 @@
   "description": "Front-end Javascript challenge for Jobsity",
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "test": "npm run test"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "Esteban Massuh",
   "license": "ISC",
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "globals": [
+      "fetch"
+    ]
+  },
   "dependencies": {
     "@emotion/core": "^10.0.27",
     "date-fns": "^2.8.1",
@@ -17,6 +26,14 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@testing-library/react": "^9.4.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "jest-emotion": "^10.0.27",
+    "jest-fetch-mock": "^3.0.1",
     "parcel": "^1.12.4",
     "standard": "^14.3.1"
   }

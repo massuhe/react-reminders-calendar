@@ -5,11 +5,14 @@ import { useEffect, useRef } from 'react'
 import Button from '../shared/Button'
 import COLORS from '../../utils/colors'
 
-const modalRoot = document.getElementById('modal-root')
+let modalRoot
 
 const Modal = ({ visible, onDismiss, children }) => {
   const el = useRef(document.createElement('div'))
   useEffect(() => {
+    if (!modalRoot) {
+      modalRoot = document.getElementById('modal-root')
+    }
     modalRoot.appendChild(el.current)
     return () => modalRoot.removeChild(el.current)
   }, [])

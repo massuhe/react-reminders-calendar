@@ -22,6 +22,7 @@ const getDescription = r => {
 const Reminder = ({ reminder, onSelect }) => {
   return (
     <div
+      data-testid='reminder'
       key={reminder.time}
       onClick={onSelect(reminder)}
       css={css`

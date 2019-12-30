@@ -7,7 +7,7 @@ const buildParams = params =>
     .join('&')
 
 const request = (endpoint, options) =>
-  window.fetch(
+  fetch(
     `${API_URL}/${endpoint}?appid=${API_KEY}&${buildParams(options.params)}`
   )
 

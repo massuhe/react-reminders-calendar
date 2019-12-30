@@ -11,6 +11,7 @@ const extractReminders = reminders => day => {
 
 const Calendar = ({
   month,
+  year,
   reminders,
   selectedDay,
   onSelectDay,
@@ -43,6 +44,7 @@ const Calendar = ({
 
 Calendar.propTypes = {
   month: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
   onSelectDay: PropTypes.func.isRequired,
   reminders: PropTypes.object,
   selectedDay: PropTypes.object

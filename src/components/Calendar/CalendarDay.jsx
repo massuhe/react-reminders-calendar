@@ -16,6 +16,7 @@ const handleClick = cb => x => () => cb(x)
 const CalendarDay = ({ day, reminders, onSelectDay, onSelectReminder }) => {
   return (
     <div
+      data-testid='calendar-day'
       css={css`
         display: flex;
         flex-direction: column;

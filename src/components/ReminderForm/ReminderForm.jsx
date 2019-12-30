@@ -35,7 +35,7 @@ const ReminderForm = ({ mode, day, reminder, onFinishSave }) => {
   return (
     <>
       <FormHeader mode={mode} onDelete={handleDelete} />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} data-testid='reminder-form'>
         <Input
           value={form.description}
           onChange={handleChange('description')}
@@ -91,7 +91,7 @@ const ReminderForm = ({ mode, day, reminder, onFinishSave }) => {
 
 ReminderForm.propTypes = {
   mode: PropTypes.oneOf(['add', 'edit', '']).isRequired,
-  day: PropTypes.object.isRequired,
+  day: PropTypes.object,
   reminder: PropTypes.object,
   onFinishSave: PropTypes.func.isRequired
 }

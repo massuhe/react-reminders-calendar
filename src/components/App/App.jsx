@@ -8,13 +8,12 @@ import useSelectedDay from './hooks/useSelectedDay'
 import makeNewReminders from '../../utils/makeReminders'
 import AppContainer from './AppContainer'
 import ActionButtons from './ActionButtons'
+import { setDay } from 'date-fns'
 
-const getCurrentMonth = () => {
-  return new Date().getMonth()
-}
+const initialMonth = () => setDay(new Date(), 1)
 
 const App = () => {
-  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth) // jan: 0 ... dic: 11
+  const [selectedMonth, setSelectedMonth] = useState(initialMonth) // jan: 0 ... dic: 11
   const [reminders, setReminders] = useState({})
   const [selectedDay, setSelectedDay] = useSelectedDay()
   const [selectedReminder, setSelectedReminder] = useState()
@@ -56,7 +55,8 @@ const App = () => {
         />
       </Modal>
       <Calendar
-        month={selectedMonth}
+        year={selectedMonth.getFullYear()}
+        month={selectedMonth.getMonth()}
         reminders={reminders}
         selectedDay={selectedDay}
         onSelectDay={setSelectedDay}

@@ -28,7 +28,14 @@ const MonthSelector = ({ currentMonth, onChangeMonth }) => {
       >
         ◀
       </span>
-      <h2>{format(currentMonth, 'LLLL yyyy')}</h2>
+      <h2
+        css={css`
+          width: 15vw;
+          text-align: center;
+        `}
+      >
+        {format(currentMonth, 'LLLL yyyy')}
+      </h2>
       <span css={arrowStyle} onClick={handleChange(addMonths(currentMonth, 1))}>
         ▶
       </span>

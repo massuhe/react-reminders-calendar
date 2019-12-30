@@ -36,7 +36,8 @@ const getPastMonthDays = month => {
 }
 
 const getNextMonthDays = (month, daysAccum) => {
-  return Array.from({ length: 35 - daysAccum }).map((_, i) => ({
+  const substractor = daysAccum > 35 ? 42 : 35
+  return Array.from({ length: substractor - daysAccum }).map((_, i) => ({
     disabled: true,
     date: resetTime(setDate(addMonths(month, 1), i + 1))
   }))
